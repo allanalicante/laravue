@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use App\Models\Job;
 
 class JobController extends Controller
 {
@@ -23,6 +24,10 @@ class JobController extends Controller
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',
             'category' => 'nullable|string|max:255',
-        ])
+        ]);
+
+        Job::create($data);
+
+        return redirect()->route('jobs.index')->with('message', 'Job created successfully.');
     }
 }
